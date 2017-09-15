@@ -1,0 +1,12 @@
+[package]
+name = "unsafe-unicorn"
+version = "0.0.0"
+authors = ["ddh <dianehosfelt@gmail.com>"]
+description = "library for analyzing usage of unsafe code in rust projects"
+license = "MPL-2.0"
+
+[dependencies]
+
+
+[examples]
+name = "cloc"
