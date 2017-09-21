@@ -1,8 +1,12 @@
 [package]
 name = "unsafe-unicorn"
-version = "0.0.0"
+version = "0.0.1"
 authors = ["ddh <dianehosfelt@gmail.com>"]
 description = "library for analyzing usage of unsafe code in rust projects"
+readme = "./README.md"
+keywords = ["unsafe"]
+categories = ["text-processing"]
+repository = "https://github.com/avadacatavra/unsafe-unicorn"
 license = "MPL-2.0"
 
 [dependencies]
