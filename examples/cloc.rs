@@ -1,73 +1,27 @@
+extern crate unsafe_unicorn;
 
-use std::fmt;
-use std::path::Path;
-use std::io::self;
-use std::fs::{self};
+use unsafe_unicorn::{ClocStats, Cloc, ClocVerbosity};
 
-pub struct ClocStats {
-	num_unsafe: i64,
-	unsafe_fns: i64,
-	total_fns: i64,
-	blank: i64,
-	comment: i64,
-	files: i64,
-	code: i64,
-	panics: i64,
-};
 
-impl ClocStats {
-	pub fn new() -> ClocStats {
-		ClocStats{
-			num_unsafe: 0,
-			unsafe_fns: 0,
-			total_fns: 0,
-			blank: 0,
-			comment: 0,
-			files: 0,
-			code: 0,
-			panics: 0,
-		}
-	}
+fn main() {
 
-	/// Gets stats for a single file
-	pub fn from_file(file: Path) -> io::Result<ClocStats> {
-		if !file.is_file() {
-			return io::Err("{} was not a file. Did you mean to use from_directory?", file)
-		}
-		let mut c = ClocStats::new();
-		c.cloc_file()
-	}
+    // Get the stats for a single file
+    let c = ClocStats::from_file("./resources/test.rs").unwrap();
+    println!("{}", c);
 
-	/// Aggregates stats for an entire directory
-	pub fn from_directory(dir: Path) -> ClocStats {
-		let mut c = ClocStats::new();
-		if !dir.is_dir() {
-			return io::Err("{} was not a directory. Did you mean to use from_file?", dir)
-		}
+    // Get the stats for the resources directory
+    let mut cloc = Cloc::new();
+    cloc.analyze_dir("./resources").unwrap();
+    println!("{}", cloc);
 
-		for entry in fs::read_dir(dir)? {
-			
-		}
+    // Add the stats for the source directory
+    // FIXME it's counting the unsafe regexes I think
+    cloc.analyze_dir("./src").unwrap();
+    println!("{}", cloc);
 
-	}
-
-	fn cloc_file(&mut self) {
-
-	}
-}
-
-impl fmt::Display for ClocStats {
-	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-		write!(f, "{}, {}, {}, {}, {}, {}, {}, {}",
-			self.num_unsafe,
-			self.unsafe_fns,
-			self.total_fns,
-			self.blank,
-			self.comment,
-			self.files,
-			self.code,
-			self.panics)
-	}
+    // Change the verbosity to be file based and then get stats file by file for resources dir
+    cloc.set_verbose(ClocVerbosity::File);
+    cloc.analyze_dir("./resources").unwrap();
+    println!("{}", cloc)
 
 }
-

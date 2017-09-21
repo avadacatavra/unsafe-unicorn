@@ -6,7 +6,18 @@ description = "library for analyzing usage of unsafe code in rust projects"
 license = "MPL-2.0"
 
 [dependencies]
+lazy_static = "0.2"
+regex = "0.2"
+prettytable-rs = "^0.6"
 
+[dev-dependencies]
+git2 = "0.6"
 
-[examples]
+[[example]]
 name = "cloc"
+
+[[example]]
+name = "cloc_git"
+
+[[example]]
+name = "stylo"
