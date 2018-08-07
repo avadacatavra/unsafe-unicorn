@@ -1,27 +1,12 @@
 [package]
 name = "unsafe-unicorn"
-version = "0.0.1"
+version = "0.0.0"
 authors = ["ddh <dianehosfelt@gmail.com>"]
 description = "library for analyzing usage of unsafe code in rust projects"
-readme = "./README.md"
-keywords = ["unsafe"]
-categories = ["text-processing"]
-repository = "https://github.com/avadacatavra/unsafe-unicorn"
 license = "MPL-2.0"
 
 [dependencies]
-lazy_static = "0.2"
-regex = "0.2"
-prettytable-rs = "^0.6"
 
-[dev-dependencies]
-git2 = "0.6"
 
-[[example]]
+[examples]
 name = "cloc"
-
-[[example]]
-name = "cloc_git"
-
-[[example]]
-name = "stylo"
